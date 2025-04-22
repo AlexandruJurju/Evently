@@ -7,11 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Abstractions\"/>
-        <Folder Include="Events\"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\Evently.Modules.Events.Domain\Evently.Modules.Events.Domain.csproj"/>
     </ItemGroup>
 
