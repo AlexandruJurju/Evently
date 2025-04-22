@@ -7,7 +7,7 @@
       dockerfile: Evently.Api/Dockerfile
     ports:
       - "5000:8080"
-#      - "5001:8081"
+  #      - "5001:8081"
 
   evently.database:
     image: postgres:latest

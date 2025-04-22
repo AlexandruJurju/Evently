@@ -1,6 +1,7 @@
 using Evently.Api;
 using Evently.Api.Extensions;
 using Evently.Modules.Events.Api;
+using Evently.Modules.Events.Infrastructure;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,7 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
         options.RoutePrefix = string.Empty;
     });
-    
+
     app.ApplyMigrations();
 }
 
