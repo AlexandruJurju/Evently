@@ -1,0 +1,30 @@
+using Evently.Api;
+using Evently.Api.Extensions;
+using Evently.Modules.Events.Api;
+
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSwaggerGenWithAuth();
+
+builder.Services.AddEventsModule(builder.Configuration);
+
+WebApplication app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.RoutePrefix = string.Empty;
+    });
+    
+    app.ApplyMigrations();
+}
+
+app.UseHttpsRedirection();
+
+EventsModule.MapEndpoints(app);
+
+app.Run();
