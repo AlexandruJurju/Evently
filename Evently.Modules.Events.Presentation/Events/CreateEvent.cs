@@ -1,10 +1,10 @@
 ﻿using Evently.Modules.Events.Application.Events.CreateEvent;
-using Evently.Modules.Events.Domain.Abstractions;
 using Evently.Modules.Events.Presentation.ApiResults;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Evently.Common.Domain;
 
 namespace Evently.Modules.Events.Presentation.Events;
 
@@ -13,18 +13,18 @@ internal static class CreateEvent
     public static void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost("events", async (Request request, ISender sender) =>
-        {
-            Result<Guid> result = await sender.Send(new CreateEventCommand(
-                request.CategoryId,
-                request.Title,
-                request.Description,
-                request.Location,
-                request.StartsAtUtc,
-                request.EndsAtUtc));
+            {
+                Result<Guid> result = await sender.Send(new CreateEventCommand(
+                    request.CategoryId,
+                    request.Title,
+                    request.Description,
+                    request.Location,
+                    request.StartsAtUtc,
+                    request.EndsAtUtc));
 
-            return result.Match(Results.Ok, ApiResults.ApiResults.Problem);
-        })
-        .WithTags(Tags.Events);
+                return result.Match(Results.Ok, ApiResults.ApiResults.Problem);
+            })
+            .WithTags(Tags.Events);
     }
 
     internal sealed class Request
