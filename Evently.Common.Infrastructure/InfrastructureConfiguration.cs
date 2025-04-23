@@ -13,7 +13,7 @@ namespace Evently.Common.Infrastructure;
 
 public static class InfrastructureConfiguration
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, 
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services,
         string databaseConnectionString,
         string redisConnectionString)
     {
@@ -23,8 +23,8 @@ public static class InfrastructureConfiguration
         services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
 
         services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
-        
-        
+
+
         IConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect(redisConnectionString);
         services.TryAddSingleton(connectionMultiplexer);
 
@@ -32,9 +32,9 @@ public static class InfrastructureConfiguration
         {
             options.ConnectionMultiplexerFactory = () => Task.FromResult(connectionMultiplexer);
         });
-        
+
         services.TryAddSingleton<ICacheService, CacheService>();
-        
+
         return services;
     }
 }
