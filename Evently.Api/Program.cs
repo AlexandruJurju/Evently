@@ -1,4 +1,3 @@
-using Evently.Api;
 using Evently.Api.Extensions;
 using Evently.Api.Middleware;
 using Evently.Common.Application;
@@ -13,24 +12,29 @@ using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseSerilog((context, loggerConfiguration) =>
-    loggerConfiguration.ReadFrom.Configuration(context.Configuration)
-);
+builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-builder.Services.AddSwaggerGenWithAuth();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.CustomSchemaIds(t => t.FullName?.Replace("+", "."));
+});
 
 builder.Services.AddApplication([
     Evently.Modules.Events.Application.AssemblyReference.Assembly,
     Evently.Modules.Users.Application.AssemblyReference.Assembly,
-    Evently.Modules.Ticketing.Application.AssemblyReference.Assembly
-]);
+    Evently.Modules.Ticketing.Application.AssemblyReference.Assembly]);
 
 string databaseConnectionString = builder.Configuration.GetConnectionString("Database")!;
 string redisConnectionString = builder.Configuration.GetConnectionString("Cache")!;
-builder.Services.AddInfrastructure(databaseConnectionString!, redisConnectionString);
+
+builder.Services.AddInfrastructure(
+    [TicketingModule.ConfigureConsumers],
+    databaseConnectionString,
+    redisConnectionString);
 
 builder.Configuration.AddModuleConfiguration(["events", "users", "ticketing"]);
 
@@ -47,7 +51,7 @@ WebApplication app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-
+    
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
@@ -56,8 +60,6 @@ if (app.Environment.IsDevelopment())
 
     app.ApplyMigrations();
 }
-
-app.UseHttpsRedirection();
 
 app.MapEndpoints();
 

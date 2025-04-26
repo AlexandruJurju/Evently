@@ -11,11 +11,11 @@ internal sealed class CreateCustomerCommandHandler(ICustomerRepository customerR
     public async Task<Result> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         var customer = Customer.Create(request.CustomerId, request.Email, request.FirstName, request.LastName);
-
+        
         customerRepository.Insert(customer);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
-
+        
         return Result.Success();
     }
 }
