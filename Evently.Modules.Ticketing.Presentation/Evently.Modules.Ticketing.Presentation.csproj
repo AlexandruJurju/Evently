@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Evently.Common.Presentation\Evently.Common.Presentation.csproj" />
-      <ProjectReference Include="..\Evently.Modules.Ticketing.Application\Evently.Modules.Ticketing.Application.csproj" />
+        <ProjectReference Include="..\Evently.Common.Presentation\Evently.Common.Presentation.csproj"/>
+        <ProjectReference Include="..\Evently.Modules.Ticketing.Application\Evently.Modules.Ticketing.Application.csproj"/>
     </ItemGroup>
 
 </Project>

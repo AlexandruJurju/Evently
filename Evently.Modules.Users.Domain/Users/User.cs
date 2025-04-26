@@ -23,7 +23,7 @@ public sealed class User : Entity
             Id = Guid.NewGuid(),
             Email = email,
             FirstName = firstName,
-            LastName = lastName,
+            LastName = lastName
         };
 
         user.Raise(new UserRegisteredDomainEvent(user.Id));
