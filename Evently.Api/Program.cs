@@ -26,7 +26,8 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddApplication([
     Evently.Modules.Events.Application.AssemblyReference.Assembly,
     Evently.Modules.Users.Application.AssemblyReference.Assembly,
-    Evently.Modules.Ticketing.Application.AssemblyReference.Assembly]);
+    Evently.Modules.Ticketing.Application.AssemblyReference.Assembly
+]);
 
 string databaseConnectionString = builder.Configuration.GetConnectionString("Database")!;
 string redisConnectionString = builder.Configuration.GetConnectionString("Cache")!;
@@ -40,7 +41,8 @@ builder.Configuration.AddModuleConfiguration(["events", "users", "ticketing"]);
 
 builder.Services.AddHealthChecks()
     .AddNpgSql(databaseConnectionString)
-    .AddRedis(redisConnectionString);
+    .AddRedis(redisConnectionString)
+    .AddUrlGroup(new Uri(builder.Configuration.GetValue<string>("Keycloak:HealthUrl")!), HttpMethod.Get, "keycloak");
 
 builder.Services.AddEventsModule(builder.Configuration);
 builder.Services.AddUsersModule(builder.Configuration);
@@ -51,7 +53,7 @@ WebApplication app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    
+
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
@@ -71,5 +73,9 @@ app.MapHealthChecks("health", new HealthCheckOptions
 app.UseSerilogRequestLogging();
 
 app.UseExceptionHandler();
+
+app.UseAuthorization();
+
+app.UseAuthorization();
 
 app.Run();
