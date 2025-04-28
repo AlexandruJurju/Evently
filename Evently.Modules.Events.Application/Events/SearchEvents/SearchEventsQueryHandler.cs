@@ -12,6 +12,7 @@ namespace Evently.Modules.Events.Application.Events.SearchEvents;
 internal sealed class SearchEventsQueryHandler(IDbConnectionFactory dbConnectionFactory)
     : IQueryHandler<SearchEventsQuery, SearchEventsResponse>
 {
+
     public async Task<Result<SearchEventsResponse>> Handle(
         SearchEventsQuery request,
         CancellationToken cancellationToken)

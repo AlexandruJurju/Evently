@@ -2,12 +2,7 @@
 
 namespace Evently.Modules.Events.Domain.TicketTypes;
 
-public sealed class TicketTypeCreatedDomainEvent : DomainEvent
+public sealed class TicketTypeCreatedDomainEvent(Guid ticketTypeId) : DomainEvent
 {
-    public TicketTypeCreatedDomainEvent(Guid ticketTypeId)
-    {
-        TicketTypeId = ticketTypeId;
-    }
-
-    public Guid TicketTypeId { get; init; }
+    public Guid TicketTypeId { get; init; } = ticketTypeId;
 }

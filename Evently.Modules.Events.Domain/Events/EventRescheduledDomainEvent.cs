@@ -2,18 +2,12 @@
 
 namespace Evently.Modules.Events.Domain.Events;
 
-public sealed class EventRescheduledDomainEvent : DomainEvent
+public sealed class EventRescheduledDomainEvent(Guid eventId, DateTime startsAtUtc, DateTime? endsAtUtc)
+    : DomainEvent
 {
-    public EventRescheduledDomainEvent(Guid eventId, DateTime startsAtUtc, DateTime? endsAtUtc)
-    {
-        EventId = eventId;
-        StartsAtUtc = startsAtUtc;
-        EndsAtUtc = endsAtUtc;
-    }
+    public Guid EventId { get; } = eventId;
 
-    public Guid EventId { get; }
+    public DateTime StartsAtUtc { get; } = startsAtUtc;
 
-    public DateTime StartsAtUtc { get; }
-
-    public DateTime? EndsAtUtc { get; }
+    public DateTime? EndsAtUtc { get; } = endsAtUtc;
 }

@@ -2,12 +2,7 @@
 
 namespace Evently.Modules.Events.Domain.Categories;
 
-public sealed class CategoryCreatedDomainEvent : DomainEvent
+public sealed class CategoryCreatedDomainEvent(Guid categoryId) : DomainEvent
 {
-    public CategoryCreatedDomainEvent(Guid categoryId)
-    {
-        CategoryId = categoryId;
-    }
-
-    public Guid CategoryId { get; init; }
+    public Guid CategoryId { get; init; } = categoryId;
 }

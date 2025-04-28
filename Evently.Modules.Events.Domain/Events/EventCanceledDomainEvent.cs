@@ -2,12 +2,7 @@
 
 namespace Evently.Modules.Events.Domain.Events;
 
-public sealed class EventCanceledDomainEvent : DomainEvent
+public sealed class EventCanceledDomainEvent(Guid eventId) : DomainEvent
 {
-    public EventCanceledDomainEvent(Guid eventId)
-    {
-        EventId = eventId;
-    }
-
-    public Guid EventId { get; init; }
+    public Guid EventId { get; init; } = eventId;
 }

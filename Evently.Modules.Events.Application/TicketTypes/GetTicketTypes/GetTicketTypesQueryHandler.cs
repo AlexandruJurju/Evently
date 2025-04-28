@@ -6,7 +6,6 @@ using Evently.Common.Domain;
 using Evently.Modules.Events.Application.Abstractions.Data;
 using Evently.Modules.Events.Application.TicketTypes.GetTicketType;
 
-
 namespace Evently.Modules.Events.Application.TicketTypes.GetTicketTypes;
 
 internal sealed class GetTicketTypesQueryHandler(IDbConnectionFactory dbConnectionFactory)

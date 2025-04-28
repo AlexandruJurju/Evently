@@ -5,7 +5,6 @@ using Evently.Common.Application.Messaging;
 using Evently.Common.Domain;
 using Evently.Modules.Events.Application.Abstractions.Data;
 
-
 namespace Evently.Modules.Events.Application.Events.GetEvents;
 
 internal sealed class GetEventsQueryHandler(IDbConnectionFactory dbConnectionFactory)

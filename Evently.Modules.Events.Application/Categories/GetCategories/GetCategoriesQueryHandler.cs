@@ -6,7 +6,6 @@ using Evently.Common.Domain;
 using Evently.Modules.Events.Application.Abstractions.Data;
 using Evently.Modules.Events.Application.Categories.GetCategory;
 
-
 namespace Evently.Modules.Events.Application.Categories.GetCategories;
 
 internal sealed class GetCategoriesQueryHandler(IDbConnectionFactory dbConnectionFactory)

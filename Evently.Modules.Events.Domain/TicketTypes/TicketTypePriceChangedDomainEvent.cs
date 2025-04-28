@@ -2,15 +2,9 @@
 
 namespace Evently.Modules.Events.Domain.TicketTypes;
 
-public sealed class TicketTypePriceChangedDomainEvent : DomainEvent
+public sealed class TicketTypePriceChangedDomainEvent(Guid ticketTypeId, decimal price) : DomainEvent
 {
-    public TicketTypePriceChangedDomainEvent(Guid ticketTypeId, decimal price)
-    {
-        TicketTypeId = ticketTypeId;
-        Price = price;
-    }
+    public Guid TicketTypeId { get; init; } = ticketTypeId;
 
-    public Guid TicketTypeId { get; init; }
-
-    public decimal Price { get; init; }
+    public decimal Price { get; init; } = price;
 }
