@@ -1,5 +1,5 @@
 using Evently.Api.Extensions;
-using Evently.Api.Middleware;
+using Evently.Api.MIddleware;
 using Evently.Common.Application;
 using Evently.Common.Infrastructure;
 using Evently.Common.Presentation.Endpoints;
