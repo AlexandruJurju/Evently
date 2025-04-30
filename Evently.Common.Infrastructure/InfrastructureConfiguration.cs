@@ -41,7 +41,7 @@ public static class InfrastructureConfiguration
         services.AddQuartz();
 
         services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
-        
+
         try
         {
             IConnectionMultiplexer connectionMultiplexer = ConnectionMultiplexer.Connect(redisConnectionString);

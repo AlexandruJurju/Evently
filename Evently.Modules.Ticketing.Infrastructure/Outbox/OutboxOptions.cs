@@ -1,4 +1,4 @@
-﻿namespace Evently.Common.Infrastructure.Outbox;
+﻿namespace Evently.Modules.Ticketing.Infrastructure.Outbox;
 
 internal sealed class OutboxOptions
 {

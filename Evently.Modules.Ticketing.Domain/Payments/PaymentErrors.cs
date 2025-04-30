@@ -4,8 +4,10 @@ namespace Evently.Modules.Ticketing.Domain.Payments;
 
 public static class PaymentErrors
 {
-    public static Error NotFound(Guid paymentId) =>
-        Error.NotFound("Payments.NotFound", $"The payment with the identifier {paymentId} was not found");
+    public static Error NotFound(Guid paymentId)
+    {
+        return Error.NotFound("Payments.NotFound", $"The payment with the identifier {paymentId} was not found");
+    }
 
     public static readonly Error AlreadyRefunded =
         Error.Problem("Payments.AlreadyRefunded", "The payment was already refunded");
